@@ -1,0 +1,79 @@
+#create a class
+class Customer:
+    def __init__(self, AccountName,AccountNumber, Address, PhoneNumber, Profession, AccountBalance = 0.0):
+        self.AccountName = AccountName
+        self.AccountNumber = AccountNumber;
+        self.Address = Address;
+        self.PhoneNumber = PhoneNumber;
+        self.Profession = Profession;
+        self.AccountBalance = AccountBalance;
+
+    def withdraw(self, amount):
+        if amount > self.AccountBalance:
+            raise RuntimeError("Insufficient Balance")
+    def checkBalance(self):
+        return self.AccountBalance
+    def deposit(self, amount):
+        amount +=self.AccountBalance
+    def createaccount(self):
+        print("AccountName: ", self.AccountName, "AccountNumber: ", self.AccountNumber, "Address: ", self.Address, "PhoneNumber: ", self.PhoneNumber, "Profession: ", self.Profession, "AccountBalnce: ", self.AccountBalance);
+
+
+
+if __name__ == "__main__":
+    AccountNumber = 0
+    Account = dict()
+    while True:
+        print("\n\n\n\n *********************************** WELCOME TO BLESSED BANK************************************** ")
+        Option = int(input("Create an Account = Press 1,  Login= Press 2 "))
+        if Option == 1:
+            Name = input("Enter Your Name: ")
+            Address = input("Enter your address: ")
+            PhoneNumber = input("Enter Phonenumber: ")
+            Profession = input("Enter your Profession: ")
+            customer = Customer(Name, Address, Profession, PhoneNumber, AccountNumber)
+            Account.update({AccountNumber: customer})
+            AccountNumber += 1
+            print("Account Created: ", "Account Name: ", Name, "\n", "Phonenumber: ", PhoneNumber, "\n","Profession: ",Profession,"\n","AccountNumber: ", AccountNumber );
+            print("*********************CREATE YOUR PASSWORD FOR LOGIN********")
+            password = input("Enter your Password:  ")
+
+        elif Option == 2:
+            input("Enter your AccountNumber: ")
+            Password = input("Enter your password: ")
+            if Password == password:
+                print("Login")
+            else:
+                print("Wrong Password \n Try again")
+            Option2 = input("Withdraw = W, CheckBalance = B, Deposit = D, View Account = V, Exit = E  ")
+            if (Option2 == "w" or Option2 == "W"):
+                temp_AccountID = int(input("Input your AccountNumber: "))
+                withDrawamount = float(input("How much will you love to withdraw: "))
+                try:
+                    customer = Account[temp_AccountID]
+                    customer.withdraw(withDrawamount)
+                    print("Current Balance: ", customer.checkBalance());
+                except:
+                    print("Error: ");
+            elif (Option2 == "D" or Option2 == "d"):
+                temp_AccountID = int(input("Input your AccountID: "))
+                depositAmount = float(input("Input the amount you want to deposit: "))
+                try:
+                    customer = Account[temp_AccountID]
+                    customer.deposit(depositAmount)
+                    print("Your Balance is now: ")
+                except:
+                    print("Error:".ex);
+            elif (Option == "B" or Option == "b"):
+                temp_AccountID = int(input("Input your AccountID: "))
+                try:
+                    customer = Account[temp_AccountID]
+                    print("Your Balance is now: ", customer.checkBalance());
+                except:
+                    print("Error:".ex);
+            elif (Option == "V" or Option == "v"):
+                for x in range(len(Account)):
+                    customer = Account(x)
+                    customer.getInfo()
+            elif (Option == "E" or Option == "e"):
+                break;
